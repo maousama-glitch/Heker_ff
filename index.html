@@ -1,10 +1,10 @@
-```html id="n9q2kp"
+```html id="q7m2xp"
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEKER FF ULTRA</title>
+<title>HEKER FF ULTRA X</title>
 
 <style>
 
@@ -16,8 +16,6 @@ body{
     font-family:monospace;
 }
 
-/* MATRIX EFFECT */
-
 canvas{
     position:fixed;
     top:0;
@@ -25,21 +23,32 @@ canvas{
     z-index:-1;
 }
 
-/* MAIN */
-
 .container{
-    padding:20px;
     max-width:500px;
     margin:auto;
+    padding:20px;
 }
 
 .title{
     text-align:center;
     font-size:35px;
     font-weight:bold;
-    margin-top:15px;
+    margin-top:10px;
     text-shadow:0 0 20px #00ff66;
     animation:glitch 1s infinite;
+}
+
+.warning{
+    text-align:center;
+    color:red;
+    margin-top:5px;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0;}
+    100%{opacity:1;}
 }
 
 @keyframes glitch{
@@ -53,7 +62,7 @@ canvas{
 
 .box{
     margin-top:20px;
-    background:rgba(0,0,0,0.7);
+    background:rgba(0,0,0,0.75);
     border:1px solid #00ff66;
     border-radius:15px;
     padding:15px;
@@ -63,10 +72,10 @@ canvas{
 .input{
     width:100%;
     padding:15px;
-    background:#0d0d0d;
+    background:#111;
     border:none;
-    color:#00ff66;
     border-radius:10px;
+    color:#00ff66;
     margin-top:10px;
     font-size:16px;
 }
@@ -80,28 +89,17 @@ canvas{
     background:#00ff66;
     color:black;
     font-weight:bold;
+    font-size:16px;
     cursor:pointer;
-    font-size:17px;
 }
 
-.terminal{
+.info{
     margin-top:15px;
-    background:#050505;
-    border-radius:10px;
-    padding:15px;
-    height:300px;
-    overflow:auto;
+    background:#111;
     border:1px solid #00ff66;
-}
-
-.line{
-    margin-bottom:10px;
-    animation:fade 0.2s linear;
-}
-
-@keyframes fade{
-    from{opacity:0;}
-    to{opacity:1;}
+    border-radius:10px;
+    padding:10px;
+    line-height:1.7;
 }
 
 .progress{
@@ -122,9 +120,9 @@ canvas{
 
 .fakecam{
     margin-top:15px;
-    border:1px solid #00ff66;
     border-radius:10px;
     overflow:hidden;
+    border:1px solid #00ff66;
 }
 
 .fakecam img{
@@ -132,10 +130,24 @@ canvas{
     display:block;
 }
 
-.loc{
-    margin-top:10px;
-    color:#00ff66;
-    font-size:14px;
+.terminal{
+    margin-top:15px;
+    background:#050505;
+    border:1px solid #00ff66;
+    border-radius:10px;
+    padding:15px;
+    height:280px;
+    overflow:auto;
+}
+
+.line{
+    margin-bottom:10px;
+    animation:fade 0.3s linear;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
 </style>
@@ -151,27 +163,36 @@ canvas{
 <div class="container">
 
 <div class="title">
-HEKER FF ULTRA
+HEKER FF ULTRA X
+</div>
+
+<div class="warning">
+⚠ TARGET DEVICE DETECTED ⚠
 </div>
 
 <div class="box">
 
-<div>
-TARGET USERNAME
-</div>
+<div>MASUKKAN USERNAME TARGET</div>
 
-<input type="text" id="target" class="input" placeholder="Masukkan nickname target">
+<input type="text" id="target" class="input" placeholder="Masukkan target...">
 
 <button class="btn" onclick="hack()">
 MULAI PENYERANGAN
 </button>
 
-<div class="progress">
-<div class="progress-bar" id="bar"></div>
+<div class="info">
+<div>IP TARGET :</div>
+<div id="fakeip">192.168.0.1</div>
+
+<div style="margin-top:10px;">DEVICE :</div>
+<div id="device">Android Device</div>
+
+<div style="margin-top:10px;">LOKASI :</div>
+<div id="lokasi">Indonesia</div>
 </div>
 
-<div class="loc" id="lokasi">
-LOKASI TARGET : MENUNGGU...
+<div class="progress">
+<div class="progress-bar" id="bar"></div>
 </div>
 
 <div class="fakecam">
@@ -188,7 +209,7 @@ LOKASI TARGET : MENUNGGU...
 
 <script>
 
-/* MATRIX */
+/* MATRIX EFFECT */
 
 const canvas=document.getElementById('matrix');
 const ctx=canvas.getContext('2d');
@@ -235,7 +256,9 @@ setInterval(draw,33);
 function line(text){
 
 let div=document.createElement('div');
+
 div.className='line';
+
 div.innerText=text;
 
 document.getElementById('terminal').appendChild(div);
@@ -273,13 +296,39 @@ alert("Masukkan target dulu 😭");
 return;
 }
 
+/* RANDOM DATA */
+
+let fakeip=
+Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255);
+
+document.getElementById('fakeip').innerText=fakeip;
+
+let devices=[
+"Samsung Victim Device",
+"iPhone Target Device",
+"Xiaomi Dark Client",
+"Oppo Secure Device",
+"Realme User Device"
+];
+
+document.getElementById('device').innerText=
+devices[Math.floor(Math.random()*devices.length)];
+
+document.getElementById('lokasi').innerText=
+"Indonesia";
+
+/* RESET */
+
 document.getElementById('terminal').innerHTML="";
 
 let proses=[
 
-"> Menghubungkan server darkweb...",
+"> Menghubungkan darkweb server...",
 "> Membypass firewall target...",
-"> Mengambil data akun FF...",
+"> Mengambil akun Free Fire...",
 "> Mengakses galeri target...",
 "> Mengambil data WhatsApp...",
 "> Membuka kamera depan...",
@@ -290,9 +339,6 @@ let proses=[
 
 let i=0;
 let persen=0;
-
-document.getElementById('lokasi').innerText=
-"LOKASI TARGET : Indonesia";
 
 let interval=setInterval(()=>{
 
@@ -321,8 +367,8 @@ document.getElementById('bar').style.width='100%';
 line(" ");
 line("TARGET : "+nama);
 line("STATUS : BERHASIL DIHACK 💀");
-line("DATA BERHASIL DIAMBIL 🗿");
-line("SISTEM TELAH DIKUASAI 🔥");
+line("DATABASE BERHASIL DIAMBIL 🗿");
+line("SISTEM TARGET TELAH DIKUASAI 🔥");
 
 }
 
