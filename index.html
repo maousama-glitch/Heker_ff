@@ -1,0 +1,172 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAKE HACK TERMINAL</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#00ff66;
+    font-family:monospace;
+    overflow:hidden;
+}
+
+.container{
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    font-size:30px;
+    margin-top:20px;
+    text-shadow:0 0 15px #00ff66;
+}
+
+.terminal{
+    margin-top:20px;
+    background:#050505;
+    border:1px solid #00ff66;
+    padding:15px;
+    border-radius:10px;
+    height:350px;
+    overflow:auto;
+    box-shadow:0 0 20px rgba(0,255,100,0.3);
+}
+
+.input{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    background:#111;
+    border:none;
+    border-radius:10px;
+    color:#00ff66;
+    font-size:16px;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#00ff66;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.line{
+    margin-bottom:8px;
+    animation:fade 0.3s linear;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="beep" src="Sound1.mp3"></audio>
+<audio id="alarm" src="Sound2.mp3"></audio>
+
+<div class="container">
+
+<div class="title">
+SYSTEM BREACH
+</div>
+
+<input type="text" id="target" class="input" placeholder="Masukkan Nama Target...">
+
+<button class="btn" onclick="hackTarget()">
+MULAI HACK
+</button>
+
+<div class="terminal" id="terminal">
+<div class="line">> SYSTEM READY...</div>
+</div>
+
+</div>
+
+<script>
+
+function addLine(text){
+    let div=document.createElement('div');
+    div.className='line';
+    div.innerText=text;
+    document.getElementById('terminal').appendChild(div);
+
+    document.getElementById('terminal').scrollTop=
+    document.getElementById('terminal').scrollHeight;
+}
+
+function play(id){
+    let a=document.getElementById(id);
+    a.currentTime=0;
+    a.play();
+}
+
+function hackTarget(){
+
+    let nama=document.getElementById('target').value;
+
+    if(nama==""){
+        alert("Masukkan target dulu 😭");
+        return;
+    }
+
+    document.getElementById('terminal').innerHTML="";
+
+    let proses=[
+        "> Menghubungkan ke server darkweb...",
+        "> Bypassing keamanan target...",
+        "> Mengambil database WhatsApp...",
+        "> Mengakses kamera depan...",
+        "> Membobol akun TikTok...",
+        "> Mengambil foto galeri...",
+        "> Mengirim virus sigma...",
+        "> ACCESS GRANTED"
+    ];
+
+    let i=0;
+
+    let interval=setInterval(()=>{
+
+        play('beep');
+
+        if(i<proses.length){
+
+            addLine(proses[i]);
+
+            i++;
+
+        }else{
+
+            clearInterval(interval);
+
+            play('alarm');
+
+            addLine(" ");
+            addLine("TARGET : "+nama);
+            addLine("STATUS : BERHASIL DIHACK 💀");
+            addLine("DATA BERHASIL DIAMBIL 🗿");
+
+        }
+
+    },1200);
+
+}
+
+</script>
+
+</body>
+</html>
+```
