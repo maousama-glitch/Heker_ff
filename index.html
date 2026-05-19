@@ -1,20 +1,23 @@
-```html id="q7m2xp"
+```html id="j7m2xp"
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEKER FF ULTRA X</title>
+
+<title>Dark Terminal</title>
 
 <style>
 
 body{
     margin:0;
     background:black;
-    overflow:hidden;
     color:#00ff66;
     font-family:monospace;
+    overflow-x:hidden;
 }
+
+/* MATRIX */
 
 canvas{
     position:fixed;
@@ -22,6 +25,8 @@ canvas{
     left:0;
     z-index:-1;
 }
+
+/* CONTAINER */
 
 .container{
     max-width:500px;
@@ -31,7 +36,7 @@ canvas{
 
 .title{
     text-align:center;
-    font-size:35px;
+    font-size:32px;
     font-weight:bold;
     margin-top:10px;
     text-shadow:0 0 20px #00ff66;
@@ -44,6 +49,8 @@ canvas{
     margin-top:5px;
     animation:blink 1s infinite;
 }
+
+/* ANIMATION */
 
 @keyframes blink{
     0%{opacity:1;}
@@ -59,6 +66,8 @@ canvas{
     80%{transform:translate(1px,-1px);}
     100%{transform:translate(0);}
 }
+
+/* BOX */
 
 .box{
     margin-top:20px;
@@ -78,6 +87,7 @@ canvas{
     color:#00ff66;
     margin-top:10px;
     font-size:16px;
+    box-sizing:border-box;
 }
 
 .btn{
@@ -93,14 +103,18 @@ canvas{
     cursor:pointer;
 }
 
+/* INFO */
+
 .info{
     margin-top:15px;
     background:#111;
     border:1px solid #00ff66;
     border-radius:10px;
     padding:10px;
-    line-height:1.7;
+    line-height:1.8;
 }
+
+/* BAR */
 
 .progress{
     width:100%;
@@ -118,17 +132,7 @@ canvas{
     transition:0.5s;
 }
 
-.fakecam{
-    margin-top:15px;
-    border-radius:10px;
-    overflow-x:hidden;
-    border:1px solid #00ff66;
-}
-
-.fakecam img{
-    width:100%;
-    display:block;
-}
+/* TERMINAL */
 
 .terminal{
     margin-top:15px;
@@ -136,7 +140,7 @@ canvas{
     border:1px solid #00ff66;
     border-radius:10px;
     padding:15px;
-    height:280px;
+    height:320px;
     overflow:auto;
 }
 
@@ -163,40 +167,38 @@ canvas{
 <div class="container">
 
 <div class="title">
-HEKER FF ULTRA X
+DARK TERMINAL
 </div>
 
 <div class="warning">
-⚠ TARGET DEVICE DETECTED ⚠
+⚠ SYSTEM ACTIVE ⚠
 </div>
 
 <div class="box">
 
-<div>MASUKKAN USERNAME TARGET</div>
+<div>MASUKKAN TARGET</div>
 
-<input type="text" id="target" class="input" placeholder="Masukkan target...">
+<input type="text" id="target" class="input" placeholder="Masukkan nama target...">
 
 <button class="btn" onclick="hack()">
-MULAI PENYERANGAN
+START SYSTEM
 </button>
 
 <div class="info">
-<div>IP TARGET :</div>
+
+<div>IP ADDRESS :</div>
 <div id="fakeip">192.168.0.1</div>
 
 <div style="margin-top:10px;">DEVICE :</div>
 <div id="device">Android Device</div>
 
-<div style="margin-top:10px;">LOKASI :</div>
+<div style="margin-top:10px;">LOCATION :</div>
 <div id="lokasi">Indonesia</div>
+
 </div>
 
 <div class="progress">
 <div class="progress-bar" id="bar"></div>
-</div>
-
-<div class="fakecam">
-<img src="https://i.imgur.com/tXSoThF.jpeg">
 </div>
 
 <div class="terminal" id="terminal">
@@ -209,7 +211,7 @@ MULAI PENYERANGAN
 
 <script>
 
-/* MATRIX EFFECT */
+/* MATRIX */
 
 const canvas=document.getElementById('matrix');
 const ctx=canvas.getContext('2d');
@@ -251,7 +253,7 @@ drops[i]++;
 
 setInterval(draw,33);
 
-/* TERMINAL */
+/* SYSTEM */
 
 function line(text){
 
@@ -296,7 +298,7 @@ alert("Masukkan target dulu 😭");
 return;
 }
 
-/* RANDOM DATA */
+/* RANDOM INFO */
 
 let fakeip=
 Math.floor(Math.random()*255)+"."+
@@ -307,11 +309,11 @@ Math.floor(Math.random()*255);
 document.getElementById('fakeip').innerText=fakeip;
 
 let devices=[
-"Samsung Victim Device",
-"iPhone Target Device",
-"Xiaomi Dark Client",
-"Oppo Secure Device",
-"Realme User Device"
+"Samsung Device",
+"iPhone Device",
+"Xiaomi Device",
+"Oppo Device",
+"Realme Device"
 ];
 
 document.getElementById('device').innerText=
@@ -326,13 +328,13 @@ document.getElementById('terminal').innerHTML="";
 
 let proses=[
 
-"> Menghubungkan darkweb server...",
-"> Membypass firewall target...",
-"> Mengambil akun Free Fire...",
-"> Mengakses galeri target...",
-"> Mengambil data WhatsApp...",
-"> Membuka kamera depan...",
-"> Mengirim malware sigma...",
+"> Connecting server...",
+"> Accessing network...",
+"> Loading database...",
+"> Bypassing firewall...",
+"> Opening terminal...",
+"> Processing target...",
+"> Injecting system...",
 "> ACCESS GRANTED"
 
 ];
@@ -366,9 +368,9 @@ document.getElementById('bar').style.width='100%';
 
 line(" ");
 line("TARGET : "+nama);
-line("STATUS : BERHASIL DIHACK 💀");
-line("DATABASE BERHASIL DIAMBIL 🗿");
-line("SISTEM TARGET TELAH DIKUASAI 🔥");
+line("STATUS : SYSTEM COMPLETE");
+line("DATABASE CONNECTED");
+line("ACCESS SUCCESS 🔥");
 
 }
 
