@@ -1,79 +1,149 @@
-```html
+```html id="n9q2kp"
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAKE HACK TERMINAL</title>
+<title>HEKER FF ULTRA</title>
 
 <style>
+
 body{
     margin:0;
     background:black;
+    overflow:hidden;
     color:#00ff66;
     font-family:monospace;
-    overflow:hidden;
 }
+
+/* MATRIX EFFECT */
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* MAIN */
 
 .container{
     padding:20px;
+    max-width:500px;
+    margin:auto;
 }
 
 .title{
     text-align:center;
-    font-size:30px;
-    margin-top:20px;
-    text-shadow:0 0 15px #00ff66;
+    font-size:35px;
+    font-weight:bold;
+    margin-top:15px;
+    text-shadow:0 0 20px #00ff66;
+    animation:glitch 1s infinite;
 }
 
-.terminal{
+@keyframes glitch{
+    0%{transform:translate(0);}
+    20%{transform:translate(-2px,2px);}
+    40%{transform:translate(2px,-2px);}
+    60%{transform:translate(-1px,1px);}
+    80%{transform:translate(1px,-1px);}
+    100%{transform:translate(0);}
+}
+
+.box{
     margin-top:20px;
-    background:#050505;
+    background:rgba(0,0,0,0.7);
     border:1px solid #00ff66;
+    border-radius:15px;
     padding:15px;
-    border-radius:10px;
-    height:350px;
-    overflow:auto;
-    box-shadow:0 0 20px rgba(0,255,100,0.3);
+    box-shadow:0 0 25px rgba(0,255,100,0.2);
 }
 
 .input{
     width:100%;
-    padding:14px;
-    margin-top:15px;
-    background:#111;
+    padding:15px;
+    background:#0d0d0d;
     border:none;
-    border-radius:10px;
     color:#00ff66;
+    border-radius:10px;
+    margin-top:10px;
     font-size:16px;
 }
 
 .btn{
     width:100%;
-    padding:14px;
-    margin-top:10px;
+    padding:15px;
+    margin-top:12px;
     border:none;
     border-radius:10px;
     background:#00ff66;
     color:black;
     font-weight:bold;
     cursor:pointer;
-    font-size:16px;
+    font-size:17px;
+}
+
+.terminal{
+    margin-top:15px;
+    background:#050505;
+    border-radius:10px;
+    padding:15px;
+    height:300px;
+    overflow:auto;
+    border:1px solid #00ff66;
 }
 
 .line{
-    margin-bottom:8px;
-    animation:fade 0.3s linear;
+    margin-bottom:10px;
+    animation:fade 0.2s linear;
 }
 
 @keyframes fade{
     from{opacity:0;}
     to{opacity:1;}
 }
+
+.progress{
+    width:100%;
+    height:18px;
+    background:#111;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:#00ff66;
+    transition:0.5s;
+}
+
+.fakecam{
+    margin-top:15px;
+    border:1px solid #00ff66;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fakecam img{
+    width:100%;
+    display:block;
+}
+
+.loc{
+    margin-top:10px;
+    color:#00ff66;
+    font-size:14px;
+}
+
 </style>
 </head>
 
 <body>
+
+<canvas id="matrix"></canvas>
 
 <audio id="beep" src="Sound1 (1).mp3"></audio>
 <audio id="alarm" src="Sound2 (1).mp3"></audio>
@@ -81,87 +151,182 @@ body{
 <div class="container">
 
 <div class="title">
-SYSTEM BREACH
+HEKER FF ULTRA
 </div>
 
-<input type="text" id="target" class="input" placeholder="Masukkan Nama Target...">
+<div class="box">
 
-<button class="btn" onclick="hackTarget()">
-MULAI HACK
+<div>
+TARGET USERNAME
+</div>
+
+<input type="text" id="target" class="input" placeholder="Masukkan nickname target">
+
+<button class="btn" onclick="hack()">
+MULAI PENYERANGAN
 </button>
 
+<div class="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+
+<div class="loc" id="lokasi">
+LOKASI TARGET : MENUNGGU...
+</div>
+
+<div class="fakecam">
+<img src="https://i.imgur.com/8Km9tLL.png">
+</div>
+
 <div class="terminal" id="terminal">
-<div class="line">> SYSTEM READY...</div>
+<div class="line">> SYSTEM ONLINE...</div>
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-function addLine(text){
-    let div=document.createElement('div');
-    div.className='line';
-    div.innerText=text;
-    document.getElementById('terminal').appendChild(div);
+/* MATRIX */
 
-    document.getElementById('terminal').scrollTop=
-    document.getElementById('terminal').scrollHeight;
+const canvas=document.getElementById('matrix');
+const ctx=canvas.getContext('2d');
+
+canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+
+const letters='01';
+const fontSize=14;
+const columns=canvas.width/fontSize;
+
+const drops=[];
+
+for(let x=0;x<columns;x++)
+drops[x]=1;
+
+function draw(){
+
+ctx.fillStyle='rgba(0,0,0,0.05)';
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle='#00ff66';
+ctx.font=fontSize+'px monospace';
+
+for(let i=0;i<drops.length;i++){
+
+const text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height&&Math.random()>0.975)
+drops[i]=0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,33);
+
+/* TERMINAL */
+
+function line(text){
+
+let div=document.createElement('div');
+div.className='line';
+div.innerText=text;
+
+document.getElementById('terminal').appendChild(div);
+
+document.getElementById('terminal').scrollTop=
+document.getElementById('terminal').scrollHeight;
+
 }
 
 function play(id){
-    let a=document.getElementById(id);
-    a.currentTime=0;
-    a.play();
+
+let a=document.getElementById(id);
+
+a.pause();
+a.currentTime=0;
+a.volume=1;
+a.play();
+
 }
 
-function hackTarget(){
+function vibrate(){
 
-    let nama=document.getElementById('target').value;
+if(navigator.vibrate){
+navigator.vibrate([300,100,300]);
+}
 
-    if(nama==""){
-        alert("Masukkan target dulu 😭");
-        return;
-    }
+}
 
-    document.getElementById('terminal').innerHTML="";
+function hack(){
 
-    let proses=[
-        "> Menghubungkan ke server darkweb...",
-        "> Bypassing keamanan target...",
-        "> Mengambil database WhatsApp...",
-        "> Mengakses kamera depan...",
-        "> Membobol akun TikTok...",
-        "> Mengambil foto galeri...",
-        "> Mengirim virus sigma...",
-        "> ACCESS GRANTED"
-    ];
+let nama=document.getElementById('target').value;
 
-    let i=0;
+if(nama==""){
+alert("Masukkan target dulu 😭");
+return;
+}
 
-    let interval=setInterval(()=>{
+document.getElementById('terminal').innerHTML="";
 
-        play('beep');
+let proses=[
 
-        if(i<proses.length){
+"> Menghubungkan server darkweb...",
+"> Membypass firewall target...",
+"> Mengambil data akun FF...",
+"> Mengakses galeri target...",
+"> Mengambil data WhatsApp...",
+"> Membuka kamera depan...",
+"> Mengirim malware sigma...",
+"> ACCESS GRANTED"
 
-            addLine(proses[i]);
+];
 
-            i++;
+let i=0;
+let persen=0;
 
-        }else{
+document.getElementById('lokasi').innerText=
+"LOKASI TARGET : Indonesia";
 
-            clearInterval(interval);
+let interval=setInterval(()=>{
 
-            play('alarm');
+play('beep');
 
-            addLine(" ");
-            addLine("TARGET : "+nama);
-            addLine("STATUS : BERHASIL DIHACK 💀");
-            addLine("DATA BERHASIL DIAMBIL 🗿");
+if(i<proses.length){
 
-        }
+line(proses[i]);
 
-    },1200);
+persen+=13;
+
+document.getElementById('bar').style.width=persen+'%';
+
+i++;
+
+}else{
+
+clearInterval(interval);
+
+play('alarm');
+
+vibrate();
+
+document.getElementById('bar').style.width='100%';
+
+line(" ");
+line("TARGET : "+nama);
+line("STATUS : BERHASIL DIHACK 💀");
+line("DATA BERHASIL DIAMBIL 🗿");
+line("SISTEM TELAH DIKUASAI 🔥");
+
+}
+
+},1200);
 
 }
 
