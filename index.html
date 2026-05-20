@@ -1,23 +1,22 @@
-```html id="j7m2xp"
+```html id="n9q2kp"
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dark Terminal</title>
+<title>HEKER FF ULTRA</title>
 
 <style>
 
 body{
     margin:0;
     background:black;
+    overflow:hidden;
     color:#00ff66;
     font-family:monospace;
-    overflow-x:hidden;
 }
 
-/* MATRIX */
+/* MATRIX EFFECT */
 
 canvas{
     position:fixed;
@@ -26,36 +25,21 @@ canvas{
     z-index:-1;
 }
 
-/* CONTAINER */
+/* MAIN */
 
 .container{
+    padding:20px;
     max-width:500px;
     margin:auto;
-    padding:20px;
 }
 
 .title{
     text-align:center;
-    font-size:32px;
+    font-size:35px;
     font-weight:bold;
-    margin-top:10px;
+    margin-top:15px;
     text-shadow:0 0 20px #00ff66;
     animation:glitch 1s infinite;
-}
-
-.warning{
-    text-align:center;
-    color:red;
-    margin-top:5px;
-    animation:blink 1s infinite;
-}
-
-/* ANIMATION */
-
-@keyframes blink{
-    0%{opacity:1;}
-    50%{opacity:0;}
-    100%{opacity:1;}
 }
 
 @keyframes glitch{
@@ -67,11 +51,9 @@ canvas{
     100%{transform:translate(0);}
 }
 
-/* BOX */
-
 .box{
     margin-top:20px;
-    background:rgba(0,0,0,0.75);
+    background:rgba(0,0,0,0.7);
     border:1px solid #00ff66;
     border-radius:15px;
     padding:15px;
@@ -81,13 +63,12 @@ canvas{
 .input{
     width:100%;
     padding:15px;
-    background:#111;
+    background:#0d0d0d;
     border:none;
-    border-radius:10px;
     color:#00ff66;
+    border-radius:10px;
     margin-top:10px;
     font-size:16px;
-    box-sizing:border-box;
 }
 
 .btn{
@@ -99,22 +80,29 @@ canvas{
     background:#00ff66;
     color:black;
     font-weight:bold;
-    font-size:16px;
     cursor:pointer;
+    font-size:17px;
 }
 
-/* INFO */
-
-.info{
+.terminal{
     margin-top:15px;
-    background:#111;
-    border:1px solid #00ff66;
+    background:#050505;
     border-radius:10px;
-    padding:10px;
-    line-height:1.8;
+    padding:15px;
+    height:300px;
+    overflow:auto;
+    border:1px solid #00ff66;
 }
 
-/* BAR */
+.line{
+    margin-bottom:10px;
+    animation:fade 0.2s linear;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
 
 .progress{
     width:100%;
@@ -132,26 +120,22 @@ canvas{
     transition:0.5s;
 }
 
-/* TERMINAL */
-
-.terminal{
+.fakecam{
     margin-top:15px;
-    background:#050505;
     border:1px solid #00ff66;
     border-radius:10px;
-    padding:15px;
-    height:320px;
-    overflow:auto;
+    overflow:hidden;
 }
 
-.line{
-    margin-bottom:10px;
-    animation:fade 0.3s linear;
+.fakecam img{
+    width:100%;
+    display:block;
 }
 
-@keyframes fade{
-    from{opacity:0;}
-    to{opacity:1;}
+.loc{
+    margin-top:10px;
+    color:#00ff66;
+    font-size:14px;
 }
 
 </style>
@@ -167,39 +151,29 @@ canvas{
 <div class="container">
 
 <div class="title">
-DARK TERMINAL
-</div>
-
-<div class="warning">
-⚠ SYSTEM ACTIVE ⚠
+HEKER FF ULTRA
 </div>
 
 <div class="box">
 
-<div>MASUKKAN TARGET</div>
+<div>
+TARGET USERNAME
+</div>
 
-<input type="text" id="target" class="input" placeholder="Masukkan nama target...">
+<input type="text" id="target" class="input" placeholder="Masukkan nickname target">
 
 <button class="btn" onclick="hack()">
-START SYSTEM
+MULAI PENYERANGAN
 </button>
-
-<div class="info">
-
-<div>IP ADDRESS :</div>
-<div id="fakeip">192.168.0.1</div>
-
-<div style="margin-top:10px;">DEVICE :</div>
-<div id="device">Android Device</div>
-
-<div style="margin-top:10px;">LOCATION :</div>
-<div id="lokasi">Indonesia</div>
-
-</div>
 
 <div class="progress">
 <div class="progress-bar" id="bar"></div>
 </div>
+
+<div class="loc" id="lokasi">
+LOKASI TARGET : MENUNGGU...
+</div>
+
 
 <div class="terminal" id="terminal">
 <div class="line">> SYSTEM ONLINE...</div>
@@ -253,14 +227,12 @@ drops[i]++;
 
 setInterval(draw,33);
 
-/* SYSTEM */
+/* TERMINAL */
 
 function line(text){
 
 let div=document.createElement('div');
-
 div.className='line';
-
 div.innerText=text;
 
 document.getElementById('terminal').appendChild(div);
@@ -298,49 +270,26 @@ alert("Masukkan target dulu 😭");
 return;
 }
 
-/* RANDOM INFO */
-
-let fakeip=
-Math.floor(Math.random()*255)+"."+
-Math.floor(Math.random()*255)+"."+
-Math.floor(Math.random()*255)+"."+
-Math.floor(Math.random()*255);
-
-document.getElementById('fakeip').innerText=fakeip;
-
-let devices=[
-"Samsung Device",
-"iPhone Device",
-"Xiaomi Device",
-"Oppo Device",
-"Realme Device"
-];
-
-document.getElementById('device').innerText=
-devices[Math.floor(Math.random()*devices.length)];
-
-document.getElementById('lokasi').innerText=
-"Indonesia";
-
-/* RESET */
-
 document.getElementById('terminal').innerHTML="";
 
 let proses=[
 
-"> Connecting server...",
-"> Accessing network...",
-"> Loading database...",
-"> Bypassing firewall...",
-"> Opening terminal...",
-"> Processing target...",
-"> Injecting system...",
+"> Menghubungkan server darkweb...",
+"> Membypass firewall target...",
+"> Mengambil data akun FF...",
+"> Mengakses galeri target...",
+"> Mengambil data WhatsApp...",
+"> Membuka kamera depan...",
+"> Mengirim malware sigma...",
 "> ACCESS GRANTED"
 
 ];
 
 let i=0;
 let persen=0;
+
+document.getElementById('lokasi').innerText=
+"LOKASI TARGET : Indonesia";
 
 let interval=setInterval(()=>{
 
@@ -368,9 +317,9 @@ document.getElementById('bar').style.width='100%';
 
 line(" ");
 line("TARGET : "+nama);
-line("STATUS : SYSTEM COMPLETE");
-line("DATABASE CONNECTED");
-line("ACCESS SUCCESS 🔥");
+line("STATUS : BERHASIL DIHACK 💀");
+line("DATA BERHASIL DIAMBIL 🗿");
+line("SISTEM TELAH DIKUASAI 🔥");
 
 }
 
